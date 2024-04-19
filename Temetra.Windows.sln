@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Temetra.Windows", "Temetra.Windows\Temetra.Windows.csproj", "{93079A65-4F25-412A-B8C0-2389AAA3CC88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93079A65-4F25-412A-B8C0-2389AAA3CC88}.Debug|x64.ActiveCfg = Debug|x64
+		{93079A65-4F25-412A-B8C0-2389AAA3CC88}.Debug|x64.Build.0 = Debug|x64
+		{93079A65-4F25-412A-B8C0-2389AAA3CC88}.Release|x64.ActiveCfg = Release|x64
+		{93079A65-4F25-412A-B8C0-2389AAA3CC88}.Release|x64.Build.0 = Release|x64
+		{D449540C-8DF8-473A-AD44-4CB687884955}.Debug|x64.ActiveCfg = Debug|x64
+		{D449540C-8DF8-473A-AD44-4CB687884955}.Debug|x64.Build.0 = Debug|x64
+		{D449540C-8DF8-473A-AD44-4CB687884955}.Release|x64.ActiveCfg = Release|x64
+		{D449540C-8DF8-473A-AD44-4CB687884955}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56012048-3416-495B-BD99-F5C71CE74B54}
+	EndGlobalSection
+EndGlobal
