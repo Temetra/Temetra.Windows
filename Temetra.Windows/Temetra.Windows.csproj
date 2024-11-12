@@ -6,7 +6,7 @@
     <Authors>Temetra</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Temetra/Temetra.Windows</RepositoryUrl>
-	<Version>1.24.0</Version>
+	<Version>1.25.0</Version>
 	<Platforms>x64</Platforms>
   </PropertyGroup>
 

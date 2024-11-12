@@ -9,6 +9,7 @@ public class ForegroundWindowHook : IDisposable
 {
     private readonly WINEVENTPROC hookDelegate;
     private HWINEVENTHOOK hookInstance;
+    private uint hookFlags = 0;
     private HWND lastHandle;
     private uint lastDwmsEventTime = 0;
     private Timer updateTimer;
@@ -22,10 +23,11 @@ public class ForegroundWindowHook : IDisposable
 
     public event EventHandler<ForegroundWindowChangedEventArgs> ForegroundWindowChanged;
 
-    public ForegroundWindowHook()
+    public ForegroundWindowHook(bool skipOwnProcess = false)
     {
         hookDelegate = new WINEVENTPROC(Callback);
         hookInstance = HWINEVENTHOOK.Null;
+        hookFlags = skipOwnProcess ? PInvoke.WINEVENT_SKIPOWNPROCESS : 0;
         lastHandle = HWND.Null;
     }
 
@@ -59,20 +61,22 @@ public class ForegroundWindowHook : IDisposable
                 pfnWinEventProc: hookDelegate,
                 idProcess: 0,
                 idThread: 0,
-                dwFlags: 0);
+                dwFlags: hookFlags);
 
             System.Diagnostics.Debug.WriteLine($"Foreground Hook = {hookInstance}");
 
-            updateTimer = new Timer(TimerCallback, null, timerDelay, timerDelay);
         }
+
+        updateTimer ??= new Timer(TimerCallback, null, timerDelay, timerDelay);
     }
 
     public void StopHook()
     {
+        updateTimer?.Dispose();
+        updateTimer = null;
+
         if (!hookInstance.IsNull)
         {
-            updateTimer.Dispose();
-
             if (!PInvoke.UnhookWinEvent(hookInstance))
             {
                 System.Diagnostics.Debug.WriteLine($"Failed to unhook foreground events");
@@ -91,7 +95,7 @@ public class ForegroundWindowHook : IDisposable
     private void Callback(HWINEVENTHOOK hWinEventHook, uint eventType, HWND hwnd, int idObject, int idChild, uint idEventThread, uint dwmsEventTime)
     {
         // Restart timer
-        updateTimer.Change(timerDelay, timerDelay);
+        updateTimer?.Change(timerDelay, timerDelay);
 
         // Only process events related to FG capture
         var eventTypeEnum = (WindowsEventHookType)eventType;
